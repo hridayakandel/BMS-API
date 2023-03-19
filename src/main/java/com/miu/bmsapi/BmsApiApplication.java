@@ -11,4 +11,3 @@ public class BmsApiApplication {
     }
 
 }
-git
