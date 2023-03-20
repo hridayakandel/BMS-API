@@ -1,10 +1,7 @@
 package com.miu.bmsapi.domain;
 
 import com.miu.bmsapi.enums.LocationType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -23,7 +20,7 @@ public class Location {
     private String description;
     private int capacity;
     private LocationType type;
-//    private List<TimeSlot> timeSlots;
-    @OneToMany
-    private List<Transaction> transactionList;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Schedule schedule;
 }

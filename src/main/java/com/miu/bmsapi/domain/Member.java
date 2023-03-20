@@ -3,7 +3,10 @@ package com.miu.bmsapi.domain;
 import com.miu.bmsapi.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,11 +29,21 @@ public class Member {
     private LoginCredentials loginCredentials;
 
     @OneToMany
-    private List<Membership> membershipList;
+    private List<Membership> membershipList = new ArrayList<>();
     @OneToMany
-    private List<Badge> badgeList;
+    @Cascade(CascadeType.ALL)
+    private List<Badge> badgeList = new ArrayList<>();
 
     @OneToMany
-    private List<Transaction> transactionList;
+    private List<Transaction> transactionList = new ArrayList<>();
+
+
+    public void addBadge(Badge badge){
+        badgeList.add(badge);
+    }
+    public void addMembership(Membership membership){
+        membershipList.add(membership);
+    }
+
 
 }

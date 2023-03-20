@@ -23,8 +23,6 @@ public class Transaction {
     @ManyToOne
     private Member member;
     @ManyToOne
-    private Membership membership;
-    @ManyToOne
     private Location location;
 
 }

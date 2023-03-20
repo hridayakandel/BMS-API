@@ -1,10 +1,7 @@
 package com.miu.bmsapi.domain;
 
 import com.miu.bmsapi.enums.Role;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -21,10 +18,8 @@ public class Plan {
     private int id;
     private String name;
     private String description;
-    private List<Role> allowedRoles;
-    @OneToMany
-    private List<Membership> membershipList;
-    @OneToMany
+    private List<Role> allowedRolesList;
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Location> locationList;
 
 }

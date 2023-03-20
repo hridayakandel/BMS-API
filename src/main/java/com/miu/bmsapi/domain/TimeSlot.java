@@ -20,6 +20,5 @@ public class TimeSlot {
     private int id;
     private LocalTime startTime;
     private LocalTime endTime;
-    private DayOfWeek dayOfWeek;
-    // Constructor, getters and setters
+
 }

@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import com.miu.bmsapi.enums.MembershipType;
 
 @Entity
 @Setter
@@ -18,10 +19,9 @@ public class Membership {
     private int id;
     private LocalDate startDate;
     private LocalDate endDate;
+    private MembershipType membershipType;
     @ManyToOne
     private Plan plan;
-    @ManyToOne
-    private Member member;
     @OneToMany
     private List<Transaction> transactionList;
 
