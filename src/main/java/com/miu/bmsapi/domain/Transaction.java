@@ -19,7 +19,6 @@ public class Transaction {
     @GeneratedValue
     private int id;
     private LocalDateTime dateTime;
-
     @ManyToOne
     private Member member;
     @ManyToOne

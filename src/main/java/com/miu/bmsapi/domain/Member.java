@@ -45,5 +45,9 @@ public class Member {
         membershipList.add(membership);
     }
 
+    public void addTransactionList(Transaction transaction){
+        transactionList.add(transaction);
+    }
+
 
 }

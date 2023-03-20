@@ -1,17 +1,17 @@
 package com.miu.bmsapi.service.impl;
 
-import com.miu.bmsapi.domain.Badge;
-import com.miu.bmsapi.domain.Location;
-import com.miu.bmsapi.domain.Member;
-import com.miu.bmsapi.domain.Transaction;
+import com.miu.bmsapi.domain.*;
+import com.miu.bmsapi.enums.WeekDays;
 import com.miu.bmsapi.repository.TransactionRepo;
-import com.miu.bmsapi.service.BadgeService;
-import com.miu.bmsapi.service.LocationService;
-import com.miu.bmsapi.service.MemberService;
-import com.miu.bmsapi.service.TransactionService;
+import com.miu.bmsapi.service.*;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 @Service
 @AllArgsConstructor
@@ -21,6 +21,8 @@ public class TransactionServiceImpl implements TransactionService {
     private BadgeService badgeService;
 
     private MemberService memberService;
+
+    private MembershipService membershipService;
 
     LocationService locationService;
     @Override
@@ -52,7 +54,34 @@ public class TransactionServiceImpl implements TransactionService {
             Member member = memberService.getByBatchID(badgeId);
             Location location = locationService.getById(locationId);
 
-//            if(member.getMembershipList().)
+           boolean isOnLocation=false;
+
+           for(int i=0; i<member.getMembershipList().size();i++){
+               for(int j=0; j<member.getMembershipList().size();j++){
+                   for (int k=0; k<member.getMembershipList().get(j).getPlan().getLocationList().size();k++){
+                       if(member.getMembershipList().get(j).getPlan().getLocationList().get(k).getId()==locationId){
+                           isOnLocation=true;
+                           break;
+                       }
+                   }
+               }
+           }
+           if(isOnLocation){
+               boolean isOnTimeRage=false;
+
+               location.getSchedule().getWeekDayList().forEach(weekDay -> {
+                   if(weekDay.getName().name().equals(WeekDays.THURSDAY.name())){
+                       weekDay.getTimeSlotList().forEach(timeSlot -> {
+                         //  if(timeSlot.getStartTime().isBefore(LocalTime.now()) && timeSlot.getEndTime().isAfter(LocalTime.now())){
+                             // Do transaction
+
+//                               member.ad
+                         //  }
+                       });
+                   }
+               });
+
+           }
 
         }else
             return ResponseEntity.badRequest().body("Badge is inactive");

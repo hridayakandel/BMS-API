@@ -29,7 +29,7 @@ public class BadgeReadController {
 
     @PostMapping("/badge/{badgeId}/location/{locationId}")
     public ResponseEntity<?> save(@PathVariable("badgeId")Integer badgeId, @PathVariable("locationId") Integer locationId){
-
+// to do locationId / planId/ BadgeId /checkerID
         return transactionService.validateAndSave(badgeId,locationId);
 
     }
